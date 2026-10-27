@@ -1,0 +1,30 @@
+{
+  "description": "Jedno źródło prawdy o migracjach Flyway: czyta je AppHost (Aspire), testy integracyjne i CI. Kolejność = kolejność uruchamiania.",
+  "modules": [
+    {
+      "name": "messaging",
+      "schema": "wolverine",
+      "location": "src/Shared/Shop.Messaging.Migrations/Sql"
+    },
+    {
+      "name": "orders",
+      "schema": "orders",
+      "location": "src/Modules/Orders/Shop.Orders.Migrations/Sql"
+    },
+    {
+      "name": "settlements",
+      "schema": "settlements",
+      "location": "src/Modules/Settlements/Shop.Settlements.Migrations/Sql"
+    },
+    {
+      "name": "datahub",
+      "schema": "datahub",
+      "location": "src/Modules/DataHub/Shop.DataHub.Migrations/Sql"
+    }
+  ],
+  "flywayArguments": [
+    "-placeholderReplacement=false",
+    "-validateMigrationNaming=true",
+    "-table=flyway_schema_history"
+  ]
+}

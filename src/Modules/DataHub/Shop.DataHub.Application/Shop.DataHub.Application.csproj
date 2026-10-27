@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- D-008: DataHubDbContext jest w Application, bo transakcyjny middleware Wolverine wymaga konkretnego typu DbContextu. -->
+  <ItemGroup>
+    <PackageReference Include="WolverineFx.EntityFrameworkCore" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shop.SharedKernel\Shop.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\Orders\Shop.Orders.Contracts\Shop.Orders.Contracts.csproj" />
+    <ProjectReference Include="..\..\Settlements\Shop.Settlements.Contracts\Shop.Settlements.Contracts.csproj" />
+  </ItemGroup>
+</Project>

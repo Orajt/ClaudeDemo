@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Marten" />
+    <PackageReference Include="WolverineFx.Marten" />
+    <PackageReference Include="FluentValidation" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.Settlements.Domain\Shop.Settlements.Domain.csproj" />
+    <ProjectReference Include="..\Shop.Settlements.Contracts\Shop.Settlements.Contracts.csproj" />
+    <ProjectReference Include="..\..\Orders\Shop.Orders.Contracts\Shop.Orders.Contracts.csproj" />
+  </ItemGroup>
+</Project>

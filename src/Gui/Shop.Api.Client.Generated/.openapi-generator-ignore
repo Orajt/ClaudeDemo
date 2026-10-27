@@ -1,0 +1,19 @@
+# Plik tworzy scripts/api/generate-contracts.sh przy każdej generacji – nie edytuj.
+# Projekt (csproj) jest nasz: Central Package Management, bez wersji pakietów i ustawień Dockera z generatora.
+# Wzorce "**/" nie obejmują korzenia katalogu – dlatego pliki w korzeniu są wymienione osobno.
+*.csproj
+**/*.csproj
+*.sln
+**/*.sln
+**/*.nuspec
+README.md
+**/README.md
+build.*
+docs/**
+test/**
+# Projekt testów klienta (generator csharp) i pliki CI generatora.
+src/*.Test/**
+appveyor.yml
+api/**
+.gitignore
+**/.gitignore

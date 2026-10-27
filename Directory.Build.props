@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Reguły stylu z .editorconfig są sprawdzane przy budowaniu, nie tylko w IDE. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Bez pliku dokumentacji kompilator nie zgłasza nieużywanych usingów (IDE0005) w czasie budowania.
+         Brak komentarza XML na typie publicznym (CS1591) nie jest błędem – wymagamy go tylko w *.Contracts (reguła). -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+</Project>

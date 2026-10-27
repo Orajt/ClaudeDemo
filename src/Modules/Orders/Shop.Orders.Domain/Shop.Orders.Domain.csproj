@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- D-009: source generator Martena 9 musi działać w assembly agregatu. Kod Domain nie używa typów JasperFx. -->
+  <ItemGroup>
+    <PackageReference Include="JasperFx.Events" />
+    <PackageReference Include="JasperFx.Events.SourceGenerator" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shop.SharedKernel\Shop.SharedKernel.csproj" />
+  </ItemGroup>
+</Project>

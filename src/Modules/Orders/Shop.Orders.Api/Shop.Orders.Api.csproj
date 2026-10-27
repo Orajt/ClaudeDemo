@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.Orders.Application\Shop.Orders.Application.csproj" />
+    <ProjectReference Include="..\..\..\Api\Shop.Api.Contracts.Generated\Shop.Api.Contracts.Generated.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Wyłącznie skrypty SQL dla Flyway (db/flyway-modules.json). Bez kodu. -->
+  <ItemGroup>
+    <Content Include="Sql\**\*.sql" />
+    <None Include="Rollback\**\*.sql" />
+  </ItemGroup>
+</Project>

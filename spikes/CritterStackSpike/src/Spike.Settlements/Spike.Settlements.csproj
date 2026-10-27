@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Marten" />
+    <PackageReference Include="WolverineFx.Marten" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spike.Contracts\Spike.Contracts.csproj" />
+  </ItemGroup>
+</Project>

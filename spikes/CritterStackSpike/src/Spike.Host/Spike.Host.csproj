@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WolverineFx.Postgresql" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spike.Orders\Spike.Orders.csproj" />
+    <ProjectReference Include="..\Spike.Settlements\Spike.Settlements.csproj" />
+    <ProjectReference Include="..\Spike.DataHub\Spike.DataHub.csproj" />
+  </ItemGroup>
+</Project>

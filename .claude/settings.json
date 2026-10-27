@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build *)",
+      "Bash(dotnet test *)",
+      "Bash(dotnet restore *)",
+      "Bash(dotnet format *)",
+      "Bash(dotnet ef *)",
+      "Bash(dotnet run --project src/Host/Shop.Host -- db-*)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(docker ps *)",
+      "Bash(docker logs *)",
+      "Bash(scripts/db/new-migration.sh *)",
+      "Bash(scripts/db/migrate-local.sh *)",
+      "Bash(scripts/dev/get-token.sh *)",
+      "WebFetch(domain:wolverinefx.net)",
+      "WebFetch(domain:martendb.io)",
+      "WebFetch(domain:weasel.jasperfx.net)",
+      "WebFetch(domain:jasperfx.github.io)",
+      "WebFetch(domain:learn.microsoft.com)",
+      "WebFetch(domain:aspire.dev)",
+      "WebFetch(domain:openapi-generator.tech)",
+      "WebFetch(domain:documentation.red-gate.com)",
+      "Bash(mkdir -p /home/marcin-jasiukiewicz/.cache/shop-flyway-pkg)",
+      "Read(//home/marcin-jasiukiewicz/.cache/**)",
+      "Bash(curl -sL --max-time 30 -o pkg.nupkg \"https://api.nuget.org/v3-flatcontainer/communitytoolkit.aspire.hosting.flyway/13.6.1/communitytoolkit.aspire.hosting.flyway.13.6.1.nupkg\")",
+      "Bash(unzip -o -q pkg.nupkg -d x)",
+      "Bash(cat x/README.md)",
+      "Bash(grep -vE '^\\\\s*$')",
+      "Bash(grep -iA3 flyway pg/README.md)",
+      "Bash(chmod +x scripts/api/generate-contracts.sh)",
+      "Bash(grep -vE \"INFO|^\\\\s*$\")"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(rm -rf *)",
+      "Edit(/src/Api/Shop.Api.Contracts.Generated/**)",
+      "Edit(/src/Gui/Shop.Api.Client.Generated/**)",
+      "Read(./.env)",
+      "Read(./**/*.pfx)",
+      "Read(./**/secrets.json)"
+    ],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(scripts/api/generate-contracts.sh *)",
+      "Bash(scripts/db/reset-local.sh *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/protect-applied-migrations.sh",
+            "args": []
+          }
+        ]
+      }
+    ]
+  }
+}

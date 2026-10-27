@@ -1,0 +1,40 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Api/">
+    <Project Path="src/Api/Shop.Api.Contracts.Generated/Shop.Api.Contracts.Generated.csproj" />
+  </Folder>
+  <Folder Name="/src/Gui/">
+    <Project Path="src/Gui/Shop.Api.Client.Generated/Shop.Api.Client.Generated.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/Shop.SharedKernel/Shop.SharedKernel.csproj" />
+    <Project Path="src/Shared/Shop.Messaging.Migrations/Shop.Messaging.Migrations.csproj" />
+  </Folder>
+  <Folder Name="/src/Host/">
+    <Project Path="src/Host/Shop.Host/Shop.Host.csproj" />
+    <Project Path="src/Host/Shop.ServiceDefaults/Shop.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Orders/">
+    <Project Path="src/Modules/Orders/Shop.Orders.Contracts/Shop.Orders.Contracts.csproj" />
+    <Project Path="src/Modules/Orders/Shop.Orders.Domain/Shop.Orders.Domain.csproj" />
+    <Project Path="src/Modules/Orders/Shop.Orders.Application/Shop.Orders.Application.csproj" />
+    <Project Path="src/Modules/Orders/Shop.Orders.Infrastructure/Shop.Orders.Infrastructure.csproj" />
+    <Project Path="src/Modules/Orders/Shop.Orders.Migrations/Shop.Orders.Migrations.csproj" />
+    <Project Path="src/Modules/Orders/Shop.Orders.Api/Shop.Orders.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Settlements/">
+    <Project Path="src/Modules/Settlements/Shop.Settlements.Contracts/Shop.Settlements.Contracts.csproj" />
+    <Project Path="src/Modules/Settlements/Shop.Settlements.Domain/Shop.Settlements.Domain.csproj" />
+    <Project Path="src/Modules/Settlements/Shop.Settlements.Application/Shop.Settlements.Application.csproj" />
+    <Project Path="src/Modules/Settlements/Shop.Settlements.Infrastructure/Shop.Settlements.Infrastructure.csproj" />
+    <Project Path="src/Modules/Settlements/Shop.Settlements.Migrations/Shop.Settlements.Migrations.csproj" />
+    <Project Path="src/Modules/Settlements/Shop.Settlements.Api/Shop.Settlements.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/DataHub/">
+    <Project Path="src/Modules/DataHub/Shop.DataHub.Application/Shop.DataHub.Application.csproj" />
+    <Project Path="src/Modules/DataHub/Shop.DataHub.Infrastructure/Shop.DataHub.Infrastructure.csproj" />
+    <Project Path="src/Modules/DataHub/Shop.DataHub.Migrations/Shop.DataHub.Migrations.csproj" />
+    <Project Path="src/Modules/DataHub/Shop.DataHub.Api/Shop.DataHub.Api.csproj" />
+  </Folder>
+</Solution>

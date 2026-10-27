@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Zdarzenia integracyjne – publiczne API modułu. Zero zależności poza BCL (.claude/rules/contracts.md). -->
+</Project>

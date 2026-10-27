@@ -1,0 +1,14 @@
+{
+  "description": "Moduły migracji spike'u – ten sam format co db/flyway-modules.json. Kolejność = kolejność uruchamiania.",
+  "modules": [
+    { "name": "messaging", "schema": "wolverine", "location": "sql/wolverine" },
+    { "name": "orders", "schema": "spike_orders", "location": "sql/spike_orders" },
+    { "name": "settlements", "schema": "spike_settlements", "location": "sql/spike_settlements" },
+    { "name": "datahub", "schema": "spike_datahub", "location": "sql/spike_datahub" }
+  ],
+  "flywayArguments": [
+    "-placeholderReplacement=false",
+    "-validateMigrationNaming=true",
+    "-table=flyway_schema_history"
+  ]
+}

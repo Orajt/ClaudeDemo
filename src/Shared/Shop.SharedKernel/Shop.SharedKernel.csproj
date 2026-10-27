@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Minimalne typy wspólne – bez zależności (docs/architecture.md). -->
+</Project>

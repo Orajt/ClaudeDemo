@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- H5: agregat w bibliotece BEZ pakietu Marten – tylko analizator (source generator) JasperFx. -->
+  <ItemGroup>
+    <PackageReference Include="JasperFx.Events" />
+    <PackageReference Include="JasperFx.Events.SourceGenerator" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

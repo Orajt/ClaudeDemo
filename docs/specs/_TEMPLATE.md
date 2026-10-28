@@ -7,6 +7,7 @@
 | **Autor** | imię (człowiek) + Claude |
 | **Akceptuje** | imię |
 | **Powiązane** | NNN-…, decyzje D-0xx |
+| **Rekomendacja modelu** | informacyjnie: `<alias>`, effort `<poziom>` – <zasada z `docs/model-policy.md`> (warunkowo, jeśli polityka ma pozycje „do potwierdzenia”) |
 
 <!--
 Zasady pisania:

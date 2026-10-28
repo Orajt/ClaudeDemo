@@ -57,7 +57,9 @@ Twoje zadanie: przygotować specyfikację, którą człowiek zaakceptuje, a pote
    - Uzasadnij jednym–dwoma zdaniami z odwołaniem do konkretnej zasady polityki.
    - Jeśli polityka ma niewypełnione pozycje (`UZUPEŁNIĆ`, „do potwierdzenia”) dotyczące proponowanego modelu
      lub effortu – zaznacz, że rekomendacja jest warunkowa i wymaga potwierdzenia dostępności.
-   - Rekomendacja trafia tylko do podsumowania w rozmowie, nie do specyfikacji.
+   - Rekomendację wpisz też do nagłówka specyfikacji, w wierszu **Rekomendacja modelu** (format w `_TEMPLATE.md`):
+     alias, effort, krótka zasada z polityki i dopisek „warunkowo”, jeśli dotyczy. Wiersz jest **informacyjny** –
+     o modelu decyduje człowiek przy uruchamianiu `/implement-slice`; pełne uzasadnienie zostaje w podsumowaniu.
 
 7. **Podsumuj** w rozmowie: ścieżka pliku, lista AC w jednym zdaniu każde, otwarte pytania, zmiany API i bazy
    oraz rekomendacja z kroku 6 w formacie:

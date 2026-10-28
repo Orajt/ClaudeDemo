@@ -1,0 +1,168 @@
+{
+  "realm": "shop",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "roles": {
+    "realm": [
+      {
+        "name": "sales",
+        "description": "Sprzedaż: składanie, anulowanie i zwroty zamówień"
+      },
+      {
+        "name": "accounting",
+        "description": "Księgowość: import raportów rozliczeniowych i niezgodności"
+      },
+      {
+        "name": "gateway",
+        "description": "Bramka płatności DemoPay: potwierdzanie płatności"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "shop-api",
+      "name": "Shop API (audience)",
+      "enabled": true,
+      "bearerOnly": true,
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    },
+    {
+      "clientId": "shop-gui",
+      "name": "Shop GUI (Blazor Server)",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "shop-gui-dev-secret",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://localhost:7180/*",
+        "http://localhost:5180/*"
+      ],
+      "webOrigins": [
+        "https://localhost:7180",
+        "http://localhost:5180"
+      ],
+      "protocolMappers": [
+        {
+          "name": "shop-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "shop-api",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        },
+        {
+          "name": "realm-roles-flat",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "claim.name": "roles",
+            "multivalued": "true",
+            "jsonType.label": "String",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "shop-dev-cli",
+      "name": "Shop dev CLI (tylko development)",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "protocolMappers": [
+        {
+          "name": "shop-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "shop-api",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        },
+        {
+          "name": "realm-roles-flat",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "claim.name": "roles",
+            "multivalued": "true",
+            "jsonType.label": "String",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "anna",
+      "enabled": true,
+      "email": "anna@shop.local",
+      "emailVerified": true,
+      "firstName": "Anna",
+      "lastName": "Sprzedaż",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Pass123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "sales"
+      ]
+    },
+    {
+      "username": "jan",
+      "enabled": true,
+      "email": "jan@shop.local",
+      "emailVerified": true,
+      "firstName": "Jan",
+      "lastName": "Księgowość",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Pass123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "accounting"
+      ]
+    },
+    {
+      "username": "demopay",
+      "enabled": true,
+      "email": "demopay@shop.local",
+      "emailVerified": true,
+      "firstName": "DemoPay",
+      "lastName": "Gateway",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Pass123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "gateway"
+      ]
+    }
+  ]
+}

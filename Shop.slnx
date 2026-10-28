@@ -13,6 +13,7 @@
   <Folder Name="/src/Host/">
     <Project Path="src/Host/Shop.Host/Shop.Host.csproj" />
     <Project Path="src/Host/Shop.ServiceDefaults/Shop.ServiceDefaults.csproj" />
+    <Project Path="src/Host/Shop.AppHost/Shop.AppHost.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
   <Folder Name="/src/Modules/Orders/">
@@ -36,5 +37,9 @@
     <Project Path="src/Modules/DataHub/Shop.DataHub.Infrastructure/Shop.DataHub.Infrastructure.csproj" />
     <Project Path="src/Modules/DataHub/Shop.DataHub.Migrations/Shop.DataHub.Migrations.csproj" />
     <Project Path="src/Modules/DataHub/Shop.DataHub.Api/Shop.DataHub.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Shop.ArchitectureTests/Shop.ArchitectureTests.csproj" />
+    <Project Path="tests/Shop.IntegrationTests/Shop.IntegrationTests.csproj" />
   </Folder>
 </Solution>

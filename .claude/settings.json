@@ -33,7 +33,11 @@
       "Bash(grep -vE '^\\\\s*$')",
       "Bash(grep -iA3 flyway pg/README.md)",
       "Bash(chmod +x scripts/api/generate-contracts.sh)",
-      "Bash(grep -vE \"INFO|^\\\\s*$\")"
+      "Bash(grep -vE \"INFO|^\\\\s*$\")",
+      "mcp__aspire__list_resources",
+      "mcp__aspire__list_console_logs",
+      "Bash(grep -E 'member name=\"M:' ~/.nuget/packages/aspire.hosting.keycloak/*/lib/net10.0/*.xml | sed 's/.*member name=\"M://;s/\".*//' | cut -c1-200)",
+      "Read(//home/marcin-jasiukiewicz/.nuget/packages/aspire.hosting.keycloak/**)"
     ],
     "deny": [
       "Bash(git push *)",

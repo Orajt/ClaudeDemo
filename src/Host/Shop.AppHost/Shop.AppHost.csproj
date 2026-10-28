@@ -1,0 +1,15 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.4">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsAspireHost>true</IsAspireHost>
+    <!-- ASPIRE010 to informacja SDK o domyślnym trybie (Dashboard i DCP z pakietów NuGet, bez wymogu Aspire CLI u każdego dewelopera). -->
+    <NoWarn>$(NoWarn);ASPIRE010</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="Aspire.Hosting.Keycloak" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.Host\Shop.Host.csproj" />
+  </ItemGroup>
+</Project>

@@ -34,11 +34,11 @@ tests/                             testy jednostkowe modułów, Shop.Integration
 | Cel | Polecenie |
 |---|---|
 | Build (ostrzeżenia = błędy) | `dotnet build Shop.slnx` |
-| Wszystkie testy (wymaga Dockera) | `dotnet test Shop.slnx` |
-| Testy jednego modułu | `dotnet test tests/Shop.Orders.Tests` |
+| Wszystkie testy (wymaga Dockera) | `dotnet test --solution Shop.slnx` |
+| Testy jednego projektu | `dotnet test --project tests/Shop.Orders.Tests` |
 | Uruchomienie lokalne | `dotnet run --project src/Host/Shop.AppHost` |
 | Regeneracja kontraktu API (symulacja pipeline'u) | `scripts/api/generate-contracts.sh` |
-| Nowa migracja | skill `db-migration` |
+| Nowa migracja | skill `db-migration` (skrypt `scripts/db/new-migration.sh`) |
 | Zgodność bazy z konfiguracją | `dotnet run --project src/Host/Shop.Host -- db-assert` |
 | Token deweloperski | `scripts/dev/get-token.sh anna` (role: anna=sales, jan=accounting, demopay=gateway) |
 
@@ -80,7 +80,7 @@ Najważniejsze pułapki są w `.claude/rules/application.md` i `.claude/rules/do
 ## Zanim powiesz „gotowe”
 
 - [ ] `dotnet build Shop.slnx` bez ostrzeżeń
-- [ ] `dotnet test Shop.slnx` zielone, w tym `Shop.ArchitectureTests` i test zgodności schematu
+- [ ] `dotnet test --solution Shop.slnx` zielone, w tym `Shop.ArchitectureTests` i test zgodności schematu
 - [ ] każde AC ze specyfikacji ma test (pokaż mapowanie AC → test)
 - [ ] migracje wygenerowane i przejrzane (brak niezamierzonych `DROP`)
 - [ ] `CLAUDE.md` modułu zaktualizowany, jeśli zmienił się model

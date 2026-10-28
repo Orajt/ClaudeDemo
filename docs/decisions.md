@@ -297,3 +297,20 @@ zgodnie z zasadą 9 z `CLAUDE.md`.
 **Decyzja (zatwierdzona przez programistę).** Pola `postgresImage` i `flywayImage` w `db/flyway-modules.json` – czytają je
 AppHost, `Shop.IntegrationTests` i skrypty. Obraz Keycloak – domyślny dla wersji pakietu Aspire.
 **Konsekwencje.** Zmiana wersji obrazu = jedna linia w jednym pliku.
+
+## D-016 Lokalna infrastruktura w AppHost – ustalenia z etapu 2
+
+**Kontekst.** Wdrożenie D-011, D-014 i D-015 w `Shop.AppHost` ujawniło cztery ograniczenia pakietów i środowiska.
+**Decyzje (do potwierdzenia przez programistę przy przeglądzie etapu 2).**
+1. **Flyway jako zwykły kontener**, nie `CommunityToolkit.Aspire.Hosting.Flyway`. Pakiet udostępnia tylko `AddFlyway(nazwa, ścieżka)`
+   i nie pozwala przekazać `-schemas`, `-locations` ani przypiętego obrazu z `flywayImage`. `AddContainer` + `WithBindMount`
+   + `WithArgs` daje pełną kontrolę (prompt etapu 2 dopuszcza ten wariant). Pakiet zostaje w `Directory.Packages.props`, ale nie jest używany.
+2. **Keycloak po HTTP** (`WithoutHttpsCertificate`, API eksperymentalne `ASPIRECERTIFICATES001`, wyciszone pragmą tylko w tym miejscu).
+   Domyślnie Aspire wystawia Keycloak po HTTPS z certyfikatem deweloperskim, który nie jest zaufany na Linuksie; skrypty,
+   `appsettings.Development.json` i `RequireHttpsMetadata=false` zakładają `http://localhost:8080`.
+3. **`ASPIRE010` wyciszone w `Shop.AppHost.csproj`.** To informacja SDK o domyślnym trybie (Dashboard i DCP z pakietów NuGet,
+   bez Aspire CLI u każdego dewelopera), nie problem w kodzie. Alternatywa: `AspireUseCliBundle=true` i wymóg Aspire CLI.
+4. **`generate-contracts.sh` czyści katalogi w kontenerze i zostawia `*.csproj`.** Usuwanie katalogu na hoście tuż przed
+   generacją dawało losowe `NoSuchFileException` (Rancher Desktop montuje `$HOME` przez VM), a zniknięcie projektu powodowało,
+   że C# Dev Kit usuwał referencje do niego z `*.Api.csproj`.
+**Konsekwencje.** Zmiana wersji Keycloaka lub Aspire może wymagać przeglądu punktów 2 i 3.

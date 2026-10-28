@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnitV3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="Shouldly" />
+  </ItemGroup>
+  <!-- Testy typów (ArchUnitNET) ładują assembly modułów – dlatego referencje do wszystkich projektów kodu. -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Orders\Shop.Orders.Contracts\Shop.Orders.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Orders\Shop.Orders.Domain\Shop.Orders.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Orders\Shop.Orders.Application\Shop.Orders.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Orders\Shop.Orders.Infrastructure\Shop.Orders.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Orders\Shop.Orders.Api\Shop.Orders.Api.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Settlements\Shop.Settlements.Contracts\Shop.Settlements.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Settlements\Shop.Settlements.Domain\Shop.Settlements.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Settlements\Shop.Settlements.Application\Shop.Settlements.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Settlements\Shop.Settlements.Infrastructure\Shop.Settlements.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Settlements\Shop.Settlements.Api\Shop.Settlements.Api.csproj" />
+    <ProjectReference Include="..\..\src\Modules\DataHub\Shop.DataHub.Application\Shop.DataHub.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\DataHub\Shop.DataHub.Infrastructure\Shop.DataHub.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\DataHub\Shop.DataHub.Api\Shop.DataHub.Api.csproj" />
+  </ItemGroup>
+</Project>

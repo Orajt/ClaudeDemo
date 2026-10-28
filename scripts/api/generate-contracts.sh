@@ -117,10 +117,17 @@ write_client_project() {
 EOF
 }
 
+# Zawartość katalogu czyścimy i odtwarzamy wewnątrz kontenera, tym samym widokiem systemu plików, którego używa generator.
+# Usuwanie na hoście tuż przed generacją dawało losowe NoSuchFileException (Rancher Desktop montuje $HOME przez VM).
+# Pliki *.csproj zostają na miejscu (są tylko nadpisywane): zniknięcie projektu powodowało, że IDE (C# Dev Kit)
+# usuwało referencje do niego z projektów *.Api.
 prepare_target_dir() {
   local target_dir="$1"
-  rm -r -- "${target_dir:?}" 2>/dev/null || true
-  mkdir -p "${target_dir}"
+  docker run --rm \
+    --user "$(id -u):$(id -g)" \
+    --volume "${REPO_ROOT}:/local" \
+    --entrypoint sh \
+    "${GENERATOR_IMAGE}" -c "mkdir -p '/local/${target_dir}' && find '/local/${target_dir}' -mindepth 1 -maxdepth 1 ! -name '*.csproj' -exec rm -rf -- {} +"
   write_ignore_file "${target_dir}"
 }
 

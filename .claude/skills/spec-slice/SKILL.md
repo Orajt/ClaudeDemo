@@ -1,6 +1,6 @@
 ---
 name: spec-slice
-description: Tworzy szkic specyfikacji slice'a w docs/specs na podstawie opisu funkcjonalności, z pytaniami o niejasności. Nie pisze kodu.
+description: Tworzy szkic specyfikacji slice'a w docs/specs na podstawie opisu funkcjonalności, z pytaniami o niejasności i rekomendacją modelu oraz effortu do implementacji (docs/model-policy.md). Nie pisze kodu.
 argument-hint: "<opis funkcjonalności>"
 disable-model-invocation: true
 ---
@@ -45,5 +45,26 @@ Twoje zadanie: przygotować specyfikację, którą człowiek zaakceptuje, a pote
    - nie ma sprzeczności z `docs/architecture.md` i `docs/decisions.md` (jeśli są celowe – pytanie w sekcji 13),
    - słownictwo zgodne z `CLAUDE.md` modułów.
 
-6. **Podsumuj** w rozmowie: ścieżka pliku, lista AC w jednym zdaniu każde, otwarte pytania, zmiany API i bazy.
+6. **Zaproponuj model i effort dla `/implement-slice`** według `docs/model-policy.md`. Przeczytaj plik przy każdym
+   uruchomieniu – nie polegaj na pamięci, polityka się zmienia.
+   - Oceń slice po tym, co wynika ze specyfikacji: liczba modułów, nowe zdarzenia integracyjne, zmiany kontraktu API,
+     migracje, nowe reguły domenowe vs. zmiana mechaniczna (np. nowa kolumna w widoku, zmiana nazwy).
+   - Dobierz model z polityki: domyślny model sesji; mocniejszy tylko w przypadkach, które polityka wymienia
+     (np. zmiana między modułami); słabszy tylko dla zmian mechanicznych. Najmocniejszego modelu nie proponujesz –
+     polityka wymaga eskalacji i decyzji człowieka; możesz jedynie zasygnalizować, że eskalacja może być potrzebna.
+   - Effort: domyślny dla modelu; niższy tylko dla zmian mechanicznych. Nie podawaj poziomów, których polityka
+     nie potwierdza.
+   - Uzasadnij jednym–dwoma zdaniami z odwołaniem do konkretnej zasady polityki.
+   - Jeśli polityka ma niewypełnione pozycje (`UZUPEŁNIĆ`, „do potwierdzenia”) dotyczące proponowanego modelu
+     lub effortu – zaznacz, że rekomendacja jest warunkowa i wymaga potwierdzenia dostępności.
+   - Rekomendacja trafia tylko do podsumowania w rozmowie, nie do specyfikacji.
+
+7. **Podsumuj** w rozmowie: ścieżka pliku, lista AC w jednym zdaniu każde, otwarte pytania, zmiany API i bazy
+   oraz rekomendacja z kroku 6 w formacie:
+
+   ```
+   Rekomendacja dla /implement-slice: model `<alias>`, effort `<poziom>`
+   Uzasadnienie: <1–2 zdania, zasada z docs/model-policy.md>
+   ```
+
    Poproś o akceptację. Status zmienia na `Zaakceptowana` **człowiek** (albo Ty – na jego wyraźne polecenie).

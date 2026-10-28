@@ -25,19 +25,10 @@
       "WebFetch(domain:aspire.dev)",
       "WebFetch(domain:openapi-generator.tech)",
       "WebFetch(domain:documentation.red-gate.com)",
-      "Bash(mkdir -p /home/marcin-jasiukiewicz/.cache/shop-flyway-pkg)",
-      "Read(//home/marcin-jasiukiewicz/.cache/**)",
-      "Bash(curl -sL --max-time 30 -o pkg.nupkg \"https://api.nuget.org/v3-flatcontainer/communitytoolkit.aspire.hosting.flyway/13.6.1/communitytoolkit.aspire.hosting.flyway.13.6.1.nupkg\")",
-      "Bash(unzip -o -q pkg.nupkg -d x)",
-      "Bash(cat x/README.md)",
-      "Bash(grep -vE '^\\\\s*$')",
-      "Bash(grep -iA3 flyway pg/README.md)",
-      "Bash(chmod +x scripts/api/generate-contracts.sh)",
-      "Bash(grep -vE \"INFO|^\\\\s*$\")",
       "mcp__aspire__list_resources",
       "mcp__aspire__list_console_logs",
-      "Bash(grep -E 'member name=\"M:' ~/.nuget/packages/aspire.hosting.keycloak/*/lib/net10.0/*.xml | sed 's/.*member name=\"M://;s/\".*//' | cut -c1-200)",
-      "Read(//home/marcin-jasiukiewicz/.nuget/packages/aspire.hosting.keycloak/**)"
+      "Bash(git rm *)",
+      "Bash(dotnet run *)"
     ],
     "deny": [
       "Bash(git push *)",

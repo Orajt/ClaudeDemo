@@ -157,7 +157,7 @@ Nie dotyczy.
 |---|---|---|
 | walidacja wejścia (FluentValidation) | `validation-failed` | 400 |
 | brak zasobu / agregatu | `<moduł>.not-found` / `not-found` | 404 |
-| konflikt współbieżności Martena | `concurrency-conflict` | 409 |
+| konflikt współbieżności Martena (`ConcurrencyException`, `ExistingStreamIdCollisionException`) | `concurrency-conflict` | 409 |
 | duplikat | kod z `DuplicateException` | 409 |
 | naruszenie reguły biznesowej | kod z `BusinessRuleViolationException` | 422 |
 | niezaimplementowane (zaślepki etapów 3–5) | brak | 500 |
@@ -279,6 +279,36 @@ Nie dotyczy (etap 6). Klient `shop-gui` w Keycloak jest przygotowany: redirect `
 * **`SharedKernelTests` w `Shop.IntegrationTests`** (zgodnie z sekcją 11) – to testy bez bazy, ale mieszkają w tym projekcie, bo projekt jednostkowy modułu jeszcze nie istnieje.
 * **Test `ApiControllersTests`** sprawdza atrybuty tylko na nadpisaniu (`inherit: false`): bazowa metoda z kontraktu ma gołe `[Authorize]`.
 * **Q-1:** usunięto wzmiankę o niezacommitowanym etapie 1 z `prompts/02-postep.md`. **Q-2:** AC-10 weryfikowane ręcznie. **Q-3:** `new-migration.sh datahub` → kod 2 i komunikat „etap 5”.
+* **AC-8: `/health` i `/alive` są mapowane tylko w Development** (wzorzec szablonu Aspire – endpointy zdrowia nie powinny być publiczne).
+  Poza Development `GET /health` zwraca 404. Testy (Alba) i lokalny AppHost działają w Development. Przed wdrożeniem poza dev –
+  osobna decyzja (np. endpoint na wewnętrznym porcie).
+* **`ExistingStreamIdCollisionException` → 409 `concurrency-conflict`** (ponowny `StartStream` z tym samym id) – poza pierwotną tabelą AC-7;
+  dopisane do tabeli w sekcji 6 i w `.claude/rules/api.md`, przypadek w `ExceptionMappingTests`.
+* **`.config/dotnet-tools.json` z `dotnet-ef` 10.0.14** – poza zakresem sekcji 2; narzędzie będzie potrzebne w etapie 5 (migracje modelu EF DataHub).
+* **Pakiety `CommunityToolkit.Aspire.Hosting.*` usunięte** z `Directory.Packages.props` – nieużywane po D-016 pkt 1.
+
+**Poprawki po przeglądzie (`/review-slice`)**
+
+* `TypeDependencyTests` używał `ResideInNamespace(wzorzec)`, który w ArchUnitNET 0.13.5 porównuje dokładną nazwę – razem z
+  `WithoutRequiringPositiveResults()` reguły przechodziły zawsze. Teraz `ResideInNamespaceMatching` + `ResideInAssembly(Assembly)`
+  oraz testy kontrolne: te same wzorce zastosowane do `Shop.Orders.Infrastructure` (zależy od Martena) muszą się wywrócić.
+* `ScriptsTests` czyta stdout i stderr równolegle (brak ryzyka zawieszenia na pełnym buforze), stderr trafia do komunikatu asercji.
+* `ContractNamingTests` pomija typy zagnieżdżone – konwencja: DTO zdarzenia jako `sealed record` zagnieżdżony w zdarzeniu
+  (zapisana w `.claude/rules/contracts.md`); kontrprzykład na typach syntetycznych.
+* Usunięto zbędne `Sql/.gitkeep` w Orders i Settlements oraz ślady sesji z `.claude/settings.json`.
+
+**Weryfikacja (28.10.2026, po poprawkach z przeglądu)**
+
+| AC | Polecenie | Wynik |
+|---|---|---|
+| AC-1 | `dotnet build Shop.slnx` | `Build succeeded`, 0 ostrzeżeń, 0 błędów |
+| AC-20 | `dotnet test --solution Shop.slnx` | 118 testów: 118 zielonych, 0 pominiętych (ArchitectureTests + IntegrationTests) |
+| AC-4 | `scripts/api/generate-contracts.sh` ×2 | oba uruchomienia: kod 0; `git status -- src/Api src/Gui` pusty po drugim |
+| AC-10 | `mcp__aspire__list_resources` | `postgres`, `shop`, `keycloak`, `host`: Running/Healthy; `flyway-messaging`, `-orders`, `-settlements`, `-datahub`: Exited, `exit_code: 0` |
+| AC-12 | `get-token.sh anna` + dekodowanie payloadu | `aud: "shop-api"`, `roles: ["sales"]`, `preferred_username: "anna"`, `azp: "shop-dev-cli"` |
+| AC-6/P-2 | `curl` na `http://localhost:5080` | `GET /health` → 200; `POST /api/orders` bez tokenu → 401, z tokenem `jan` → 403; `GET /api/datahub/order-payments` z tokenem `anna` → 500 `unexpected-error`, „NotImplementedException: Etap 5” |
+| AC-14 | `migrate-local.sh` | kod 0, „Gotowe: migracje wszystkich modułów zastosowane.” (schematy aktualne) |
+| AC-14 | `echo nie \| reset-local.sh` | kod 1, „Przerwano – nic nie zostało usunięte.”; po odmowie wszystkie schematy istnieją z tabelami: `datahub:1, orders:2, settlements:2, wolverine:10` |
 
 **Do zrobienia później (poza zakresem etapu 2)**
 

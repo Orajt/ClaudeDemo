@@ -30,14 +30,17 @@ public sealed class ScriptsTests
     [Trait("AC", "AC-13")]
     public async Task Script_HelpExitsZeroWithPolishUsage(string relativePath)
     {
-        var (exitCode, output) = await RunAsync(relativePath, "--help");
+        var result = await RunAsync(relativePath, "--help");
 
-        exitCode.ShouldBe(0);
-        output.ShouldContain("Użycie:");
+        result.ExitCode.ShouldBe(0, $"stderr: {result.Error}");
+        result.Output.ShouldContain("Użycie:", customMessage: $"stderr: {result.Error}");
     }
 
-    private static async Task<(int ExitCode, string Output)> RunAsync(string relativePath, string argument)
+    private sealed record ScriptResult(int ExitCode, string Output, string Error);
+
+    private static async Task<ScriptResult> RunAsync(string relativePath, string argument)
     {
+        var cancellationToken = TestContext.Current.CancellationToken;
         var startInfo = new ProcessStartInfo("bash")
         {
             WorkingDirectory = RepositoryLocator.Root,
@@ -47,8 +50,10 @@ public sealed class ScriptsTests
         };
 
         using var process = Process.Start(startInfo)!;
-        var output = await process.StandardOutput.ReadToEndAsync(TestContext.Current.CancellationToken);
-        await process.WaitForExitAsync(TestContext.Current.CancellationToken);
-        return (process.ExitCode, output);
+        // Oba strumienie czytane równolegle – inaczej pełny bufor stderr zawiesiłby proces.
+        var outputTask = process.StandardOutput.ReadToEndAsync(cancellationToken);
+        var errorTask = process.StandardError.ReadToEndAsync(cancellationToken);
+        await process.WaitForExitAsync(cancellationToken);
+        return new ScriptResult(process.ExitCode, await outputTask, await errorTask);
     }
 }

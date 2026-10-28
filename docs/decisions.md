@@ -284,7 +284,7 @@ w procesie pracy.
 **Decyzja (zatwierdzona przez programistę).** Oprócz wersji z D-012 w `Directory.Packages.props` są: Aspire 13.6.4
 (`Aspire.AppHost.Sdk`, `Aspire.Hosting.PostgreSQL`), `Aspire.Hosting.Keycloak` i `Aspire.Keycloak.Authentication`
 13.6.4-preview.1.26523.11 (brak wersji stabilnej), `CommunityToolkit.Aspire.Hosting.Flyway` i
-`CommunityToolkit.Aspire.Hosting.PostgreSQL.Extensions` 13.6.1, `WolverineFx.FluentValidation` / `WolverineFx.RuntimeCompilation` 6.56.0,
+`CommunityToolkit.Aspire.Hosting.PostgreSQL.Extensions` 13.6.1 (później usunięte – D-016 pkt 1), `WolverineFx.FluentValidation` / `WolverineFx.RuntimeCompilation` 6.56.0,
 `FluentValidation` 12.2.0, pakiety ServiceDefaults (OpenTelemetry 1.20.1, `Microsoft.Extensions.Http.Resilience` /
 `ServiceDiscovery` 10.11.0), zależności wygenerowanego klienta GUI (`Microsoft.Extensions.Http`, `.Hosting`, `.Http.Polly`,
 `Microsoft.Net.Http.Headers` 10.0.14), `Alba` 8.5.3, `TngTech.ArchUnitNET.xUnitV3` 0.13.5.
@@ -304,7 +304,9 @@ AppHost, `Shop.IntegrationTests` i skrypty. Obraz Keycloak – domyślny dla wer
 **Decyzje (do potwierdzenia przez programistę przy przeglądzie etapu 2).**
 1. **Flyway jako zwykły kontener**, nie `CommunityToolkit.Aspire.Hosting.Flyway`. Pakiet udostępnia tylko `AddFlyway(nazwa, ścieżka)`
    i nie pozwala przekazać `-schemas`, `-locations` ani przypiętego obrazu z `flywayImage`. `AddContainer` + `WithBindMount`
-   + `WithArgs` daje pełną kontrolę (prompt etapu 2 dopuszcza ten wariant). Pakiet zostaje w `Directory.Packages.props`, ale nie jest używany.
+   + `WithArgs` daje pełną kontrolę (prompt etapu 2 dopuszcza ten wariant). Pakiety `CommunityToolkit.Aspire.Hosting.Flyway`
+   i `CommunityToolkit.Aspire.Hosting.PostgreSQL.Extensions` (D-014) nie są używane, więc usunięto je z `Directory.Packages.props`
+   (przegląd etapu 2). Powrót do nich wymaga ponownej zgody zgodnie z zasadą 9.
 2. **Keycloak po HTTP** (`WithoutHttpsCertificate`, API eksperymentalne `ASPIRECERTIFICATES001`, wyciszone pragmą tylko w tym miejscu).
    Domyślnie Aspire wystawia Keycloak po HTTPS z certyfikatem deweloperskim, który nie jest zaufany na Linuksie; skrypty,
    `appsettings.Development.json` i `RequireHttpsMetadata=false` zakładają `http://localhost:8080`.

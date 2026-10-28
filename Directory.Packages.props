@@ -33,8 +33,6 @@
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.6.4" />
     <PackageVersion Include="Aspire.Hosting.Keycloak" Version="13.6.4-preview.1.26523.11" />
     <PackageVersion Include="Aspire.Keycloak.Authentication" Version="13.6.4-preview.1.26523.11" />
-    <PackageVersion Include="CommunityToolkit.Aspire.Hosting.Flyway" Version="13.6.1" />
-    <PackageVersion Include="CommunityToolkit.Aspire.Hosting.PostgreSQL.Extensions" Version="13.6.1" />
   </ItemGroup>
 
   <!-- ServiceDefaults (szablon Aspire) – D-014 -->

@@ -55,5 +55,5 @@ Sygnatury metod wynikają z generatora (openapi-generator `aspnetcore` nie dodaj
 |---|---|---|
 | `FluentValidation.ValidationException` | 400 | `validation-failed` + `errors` |
 | `NotFoundException`, `RequiredDataMissingException` (brak agregatu dla `[WriteModel]`) | 404 | `<moduł>.not-found` / `not-found` |
-| konflikt współbieżności Martena, `DuplicateException` | 409 | `concurrency-conflict` / kod z wyjątku |
+| konflikt współbieżności Martena (`ConcurrencyException`, `ExistingStreamIdCollisionException` – drugi `StartStream` z tym samym id), `DuplicateException` | 409 | `concurrency-conflict` / kod z wyjątku |
 | `BusinessRuleViolationException` | 422 | kod z wyjątku |

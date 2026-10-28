@@ -10,6 +10,8 @@ paths:
 * Tylko `sealed record` zdarzeń integracyjnych i typy wartości, których używają (enumy). Zero logiki, zero zależności
   poza BCL.
 * Nazwa: `<Fakt>IntegrationEvent`, namespace `Shop.<Moduł>.Contracts`.
+* DTO używane przez zdarzenie (np. pozycja zamówienia) to `sealed record` **zagnieżdżony** w zdarzeniu
+  (`OrderStateChangedIntegrationEvent.Line`) – bez sufiksu. Rekord najwyższego poziomu bez sufiksu wywraca test AC-18.
 * Każde zdarzenie ma komentarz XML (po polsku): co oznacza, kiedy jest publikowane, kto je konsumuje.
 * Zdarzenia zmiany stanu mają `Guid <Agregat>Id` i `long Version`. Zdarzenia dziennikowe mają unikalny identyfikator
   faktu (np. `DiscrepancyId`).

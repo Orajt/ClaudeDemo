@@ -2,6 +2,7 @@ using System.Text.Json;
 using FluentValidation;
 using FluentValidation.Results;
 using JasperFx;
+using Marten.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Host.ErrorHandling;
@@ -19,6 +20,7 @@ public sealed class ExceptionMappingTests(ShopFixture fixture)
         { "not-found", new NotFoundException("orders.not-found", "Brak zamówienia"), 404, "orders.not-found" },
         { "required-data-missing", new RequiredDataMissingException("Brak danych"), 404, "not-found" },
         { "concurrency", new ConcurrencyException("Konflikt"), 409, "concurrency-conflict" },
+        { "stream-id-collision", new ExistingStreamIdCollisionException(Guid.CreateVersion7(), typeof(object)), 409, "concurrency-conflict" },
         { "duplicate", new DuplicateException("settlements.report-already-imported", "Raport już zaimportowany"), 409, "settlements.report-already-imported" },
         { "business-rule", new BusinessRuleViolationException("orders.refund-not-allowed", "Zwrot niedozwolony"), 422, "orders.refund-not-allowed" },
         { "unexpected", new InvalidOperationException("Awaria"), 500, "unexpected-error" }
